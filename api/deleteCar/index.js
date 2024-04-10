@@ -1,8 +1,12 @@
 const cars = require("../cars.json");
 
 module.exports = async function (context, req) {
-  const id = req.params.id;
-  const index = cars.findIndex((car) => car.id === id);
+  const index = req.params.index;
+  context.log(index);
+  const deleteCar = cars[index];
   cars.splice(index, 1);
-  context.res = { message: `Car with id ${id} deleted` };
+
+  context.res = {
+    body: deleteCar,
+  };
 };
